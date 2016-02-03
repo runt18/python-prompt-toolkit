@@ -63,3 +63,32 @@ class DocumentTest(unittest.TestCase):
 
         pos = self.document.translate_index_to_position(0)
         self.assertEqual(pos, (0, 0))
+
+    def test_getitem(self):
+        d = Document('line1\nline2\nline3')
+        self.assertEqual(d.lines, ['line1', 'line2', 'line3'])
+        self.assertEqual(d._line_start_indexes, [0, 6, 12])
+
+        d2 = d[:10]
+        self.assertEqual(d2.text, 'line1\nline')
+        self.assertEqual(d2.lines, ['line1', 'line'])
+        self.assertEqual(d2._line_start_indexes, [0, 6])
+
+        d3 = d[3:10]
+        self.assertEqual(d3.text, 'e1\nline')
+        self.assertEqual(d3.lines, ['e1', 'line'])
+        self.assertEqual(d3._line_start_indexes, [0, 3])
+
+    def test_concatenate(self):
+        d = Document('line1\nline2\nline3')
+        self.assertEqual(d.lines, ['line1', 'line2', 'line3'])
+        self.assertEqual(d._line_start_indexes, [0, 6, 12])
+
+        d2 = Document('line4\nline5\nline6')
+        self.assertEqual(d2.lines, ['line4', 'line5', 'line6'])
+        self.assertEqual(d2._line_start_indexes, [0, 6, 12])
+
+        d3 = d + d2
+        self.assertEqual(d3.lines, [
+            'line1', 'line2', 'line3line4', 'line5', 'line6'])
+        self.assertEqual(d3._line_start_indexes, [0, 6, 12, 23, 29])

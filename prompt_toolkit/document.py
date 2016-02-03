@@ -546,8 +546,11 @@ class Document(object):
         user pressed the arrow-up button.
         """
         assert count >= 1
-        return self.translate_row_col_to_index(
-            self.cursor_position_row - count, self.cursor_position_col) - self.cursor_position
+        if self.cursor_position_row > 0:
+            return self.translate_row_col_to_index(
+                self.cursor_position_row - count, self.cursor_position_col) - self.cursor_position
+        else:
+            return 0
 
     def get_cursor_down_position(self, count=1):
         """
@@ -848,7 +851,7 @@ class Document(object):
 
             document._cache.line_indexes = (
                 self._cache.line_indexes +
-                [index + offset for index in other._cache.line_indexes])
+                [index + offset for index in other._cache.line_indexes[1:]])
 
         return document
 

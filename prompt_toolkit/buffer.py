@@ -425,6 +425,11 @@ class Buffer(object):
         if cursor_position_changed:
             self._cursor_position_changed()
 
+        # Access self.document, just to be sure that we have a document like
+        # this in the cache. (This avoids that the garbage collector cleans up
+        # our Document._cache, which is stored as a WeakValueDictionary.)
+        self.document
+
     # End of <getters/setters>
 
     def save_to_undo_stack(self, clear_redo_stack=True):
