@@ -896,10 +896,12 @@ class Buffer(object):
 
             self.text = otext[:ocpos] + data + otext[ocpos + len(overwritten_text):]
         else:
-            self.text = otext[:ocpos] + data + otext[ocpos:]
+            self.document = self.document.insert_text(data)
 
-        if move_cursor:
-            self.cursor_position += len(data)
+#            self.text = otext[:ocpos] + data + otext[ocpos:]
+
+#        if move_cursor:
+#            self.cursor_position += len(data)
 
         # Fire 'on_text_insert' event.
         if fire_event:

@@ -793,6 +793,78 @@ class Document(object):
 
     # Modifiers.
 
+    def __getitem__(self, item):
+        """
+        Return a :class:`.Document` instance that covers this slice of text.
+        """
+        assert isinstance(item, slice)
+        start = item.start or 0
+        stop = item.stop or len(self.text)
+
+        text = self.text[start:stop]
+        document = Document(text=text)
+
+        # Copy the cached lines from this document to the sliced document.
+        # (Only when this information was already calculated.)
+        if self._cache.lines and self._cache.line_indexes:
+            row1, _ = self.translate_index_to_position(start)
+            row2, _ = self.translate_index_to_position(stop)
+
+            new_cache = document._cache
+
+            # Slice lines.
+            new_cache.lines = self._cache.lines[row1:row2 + 1]
+            new_cache.lines[0] = text.split('\n', 1)[0]
+            new_cache.lines[-1] = text.rsplit('\n', 1)[-1]
+
+            # Slice line indexes.
+            new_cache.line_indexes = self._cache.line_indexes[row1:row2 + 1]
+            new_cache.line_indexes[0] = 0
+            new_cache.line_indexes[-1] = len(text) - len(new_cache.lines[-1])
+
+        return document
+
+    def __add__(self, other):
+        """
+        Concatenate two documents.
+        """
+        assert isinstance(other, Document)
+
+        text = self.text + other.text
+        document = Document(text=text)
+
+        # Merge cache of both documents. (When they both have a cache already.)
+        if self._cache.lines and other._cache.lines:
+            self._cache.lines[-1] + other._cache.lines[0]
+
+            document._cache.lines = (
+                self._cache.lines[:-1] +
+                [self._cache.lines[-1] + other._cache.lines[0]] +
+                other._cache.lines[1:])
+
+        # Merge line indexes of both documents.
+        if self._cache.line_indexes and other._cache.line_indexes:
+            offset = len(self.text)
+
+            document._cache.line_indexes = (
+                self._cache.line_indexes +
+                [index + offset for index in other._cache.line_indexes])
+
+        return document
+
+    def insert_text(self, text):
+        cursor_position = self.cursor_position
+
+        d = Document(text)
+        d.lines
+        d._line_start_indexes
+
+        document = self[:cursor_position] + d + self[cursor_position:]
+
+        return Document(
+            document.text,
+            self.cursor_position + len(text))
+
     def insert_after(self, text):
         """
         Create a new document, with this text inserted after the buffer.
