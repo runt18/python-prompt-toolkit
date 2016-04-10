@@ -52,7 +52,7 @@ animal_completer = WordCompleter([
 def main():
     text = prompt('Give some animals: ', completer=animal_completer,
                   complete_while_typing=False)
-    print('You said: %s' % text)
+    print('You said: {0!s}'.format(text))
 
 
 if __name__ == '__main__':

@@ -20,7 +20,7 @@ def _clock_tokens(cli):
     " Tokens to be shown before the prompt. "
     now = datetime.datetime.now()
     return [
-        (Token.Prompt, '%s:%s:%s' % (now.hour, now.minute, now.second)),
+        (Token.Prompt, '{0!s}:{1!s}:{2!s}'.format(now.hour, now.minute, now.second)),
         (Token.Prompt, ' Enter something: ')
     ]
 
@@ -56,7 +56,7 @@ def main():
     cli = CommandLineInterface(application=app, eventloop=eventloop)
 
     code_obj = cli.run()
-    print('You said: %s' % code_obj.text)
+    print('You said: {0!s}'.format(code_obj.text))
 
     eventloop.close()
 

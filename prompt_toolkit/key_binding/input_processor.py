@@ -29,7 +29,7 @@ class KeyPress(object):
         self.data = data
 
     def __repr__(self):
-        return '%s(key=%r, data=%r)' % (
+        return '{0!s}(key={1!r}, data={2!r})'.format(
             self.__class__.__name__, self.key, self.data)
 
     def __eq__(self, other):
@@ -223,7 +223,7 @@ class Event(object):
         self._arg = arg
 
     def __repr__(self):
-        return 'Event(arg=%r, key_sequence=%r, is_repeat=%r)' % (
+        return 'Event(arg={0!r}, key_sequence={1!r}, is_repeat={2!r})'.format(
                 self.arg, self.key_sequence, self.is_repeat)
 
     @property
@@ -269,7 +269,7 @@ class Event(object):
                 data = '-1'
             result = int(data)
         else:
-            result = int("%s%s" % (current, data))
+            result = int("{0!s}{1!s}".format(current, data))
 
         # Don't exceed a million.
         if int(result) >= 1000000:

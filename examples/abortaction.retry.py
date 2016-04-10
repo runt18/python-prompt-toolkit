@@ -11,4 +11,4 @@ from prompt_toolkit import prompt, AbortAction
 
 if __name__ == '__main__':
     answer = prompt('Give me some input: ', on_abort=AbortAction.RETRY)
-    print('You said: %s' % answer)
+    print('You said: {0!s}'.format(answer))

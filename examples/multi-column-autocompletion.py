@@ -46,7 +46,7 @@ animal_completer = WordCompleter([
 
 def main():
     text = prompt('Give some animals: ', completer=animal_completer, display_completions_in_columns=True)
-    print('You said: %s' % text)
+    print('You said: {0!s}'.format(text))
 
 
 if __name__ == '__main__':

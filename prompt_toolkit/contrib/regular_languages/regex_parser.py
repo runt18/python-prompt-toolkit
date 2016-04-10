@@ -53,7 +53,7 @@ class Any(Node):
         return Any(self.children + [other_node])
 
     def __repr__(self):
-        return '%s(%r)' % (self.__class__.__name__, self.children)
+        return '{0!s}({1!r})'.format(self.__class__.__name__, self.children)
 
 
 class Sequence(Node):
@@ -68,7 +68,7 @@ class Sequence(Node):
         return Sequence(self.children + [other_node])
 
     def __repr__(self):
-        return '%s(%r)' % (self.__class__.__name__, self.children)
+        return '{0!s}({1!r})'.format(self.__class__.__name__, self.children)
 
 
 class Regex(Node):
@@ -81,7 +81,7 @@ class Regex(Node):
         self.regex = regex
 
     def __repr__(self):
-        return '%s(/%s/)' % (self.__class__.__name__, self.regex)
+        return '{0!s}(/{1!s}/)'.format(self.__class__.__name__, self.regex)
 
 
 class Lookahead(Node):
@@ -93,7 +93,7 @@ class Lookahead(Node):
         self.negative = negative
 
     def __repr__(self):
-        return '%s(%r)' % (self.__class__.__name__, self.childnode)
+        return '{0!s}({1!r})'.format(self.__class__.__name__, self.childnode)
 
 
 class Variable(Node):
@@ -109,7 +109,7 @@ class Variable(Node):
         self.varname = varname
 
     def __repr__(self):
-        return '%s(childnode=%r, varname=%r)' % (
+        return '{0!s}(childnode={1!r}, varname={2!r})'.format(
             self.__class__.__name__, self.childnode, self.varname)
 
 
@@ -121,7 +121,7 @@ class Repeat(Node):
         self.greedy = greedy
 
     def __repr__(self):
-        return '%s(childnode=%r)' % (self.__class__.__name__, self.childnode)
+        return '{0!s}(childnode={1!r})'.format(self.__class__.__name__, self.childnode)
 
 
 def tokenize_regex(input):
@@ -242,10 +242,10 @@ def parse_regex(regex_tokens):
 
             elif t.startswith('{'):
                 # TODO: implement!
-                raise Exception('{}-style repitition not yet supported' % t)
+                raise Exception('{{}}-style repitition not yet supported'.format(*t))
 
             elif t.startswith('(?'):
-                raise Exception('%r not supported' % t)
+                raise Exception('{0!r} not supported'.format(t))
 
             elif t.isspace():
                 pass

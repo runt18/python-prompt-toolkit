@@ -74,13 +74,13 @@ class _CompiledGrammar(object):
         counter = [0]
 
         def create_group_func(node):
-            name = 'n%s' % counter[0]
+            name = 'n{0!s}'.format(counter[0])
             self._group_names_to_nodes[name] = node.varname
             counter[0] += 1
             return name
 
         # Compile regex strings.
-        self._re_pattern = '^%s$' % self._transform(root_node, create_group_func)
+        self._re_pattern = '^{0!s}$'.format(self._transform(root_node, create_group_func))
         self._re_prefix_patterns = list(self._transform_prefix(root_node, create_group_func))
 
         # Compile the regex itself.
@@ -93,7 +93,7 @@ class _CompiledGrammar(object):
         # input. This will ensure that we can still highlight the input correctly, even when the
         # input contains some additional characters at the end that don't match the grammar.)
         self._re_prefix_with_trailing_input = [
-            re.compile(r'(?:%s)(?P<%s>.*?)$' % (t.rstrip('$'), _INVALID_TRAILING_INPUT), flags)
+            re.compile(r'(?:{0!s})(?P<{1!s}>.*?)$'.format(t.rstrip('$'), _INVALID_TRAILING_INPUT), flags)
             for t in self._re_prefix_patterns]
 
     def escape(self, varname, value):
@@ -122,7 +122,7 @@ class _CompiledGrammar(object):
         def transform(node):
             # Turn `Any` into an OR.
             if isinstance(node, Any):
-                return '(?:%s)' % '|'.join(transform(c) for c in node.children)
+                return '(?:{0!s})'.format('|'.join(transform(c) for c in node.children))
 
             # Concatenate a `Sequence`
             elif isinstance(node, Sequence):
@@ -138,17 +138,17 @@ class _CompiledGrammar(object):
 
             # A `Variable` wraps the children into a named group.
             elif isinstance(node, Variable):
-                return '(?P<%s>%s)' % (create_group_func(node), transform(node.childnode))
+                return '(?P<{0!s}>{1!s})'.format(create_group_func(node), transform(node.childnode))
 
             # `Repeat`.
             elif isinstance(node, Repeat):
-                return '(?:%s){%i,%s}%s' % (
+                return '(?:{0!s}){{{1:d},{2!s}}}{3!s}'.format(
                     transform(node.childnode), node.min_repeat,
                     ('' if node.max_repeat is None else str(node.max_repeat)),
                     ('' if node.greedy else '?')
                 )
             else:
-                raise TypeError('Got %r' % (node, ))
+                raise TypeError('Got {0!r}'.format(node ))
 
         return transform(root_node)
 
@@ -177,7 +177,7 @@ class _CompiledGrammar(object):
             if isinstance(node, Any):
                 for c in node.children:
                     for r in transform(c):
-                        yield '(?:%s)?' % r
+                        yield '(?:{0!s})?'.format(r)
 
             # For a sequence. We can either have a match for the sequence
             # of all the children, or for an exact match of the first X
@@ -186,14 +186,14 @@ class _CompiledGrammar(object):
                 for i in range(len(node.children)):
                     a = [cls._transform(c, create_group_func) for c in node.children[:i]]
                     for c in transform(node.children[i]):
-                        yield '(?:%s)' % (''.join(a) + c)
+                        yield '(?:{0!s})'.format((''.join(a) + c))
 
             elif isinstance(node, Regex):
-                yield '(?:%s)?' % node.regex
+                yield '(?:{0!s})?'.format(node.regex)
 
             elif isinstance(node, Lookahead):
                 if node.negative:
-                    yield '(?!%s)' % cls._transform(node.childnode, create_group_func)
+                    yield '(?!{0!s})'.format(cls._transform(node.childnode, create_group_func))
                 else:
                     # Not sure what the correct semantics are in this case.
                     # (Probably it's not worth implementing this.)
@@ -203,7 +203,7 @@ class _CompiledGrammar(object):
                 # (Note that we should not append a '?' here. the 'transform'
                 # method will already recursively do that.)
                 for c in transform(node.childnode):
-                    yield '(?P<%s>%s)' % (create_group_func(node), c)
+                    yield '(?P<{0!s}>{1!s})'.format(create_group_func(node), c)
 
             elif isinstance(node, Repeat):
                 # If we have a repetition of 8 times. That would mean that the
@@ -213,20 +213,20 @@ class _CompiledGrammar(object):
 
                 for c in transform(node.childnode):
                     if node.max_repeat:
-                        repeat_sign = '{,%i}' % (node.max_repeat - 1)
+                        repeat_sign = '{{,{0:d}}}'.format((node.max_repeat - 1))
                     else:
                         repeat_sign = '*'
-                    yield '(?:%s)%s%s(?:%s)?' % (
+                    yield '(?:{0!s}){1!s}{2!s}(?:{3!s})?'.format(
                         prefix,
                         repeat_sign,
                         ('' if node.greedy else '?'),
                         c)
 
             else:
-                raise TypeError('Got %r' % node)
+                raise TypeError('Got {0!r}'.format(node))
 
         for r in transform(root_node):
-            yield '^%s$' % r
+            yield '^{0!s}$'.format(r)
 
     def match(self, string):
         """
@@ -346,8 +346,8 @@ class Variables(object):
         self._tuples = tuples
 
     def __repr__(self):
-        return '%s(%s)' % (
-            self.__class__.__name__, ', '.join('%s=%r' % (k, v) for k, v, _ in self._tuples))
+        return '{0!s}({1!s})'.format(
+            self.__class__.__name__, ', '.join('{0!s}={1!r}'.format(k, v) for k, v, _ in self._tuples))
 
     def get(self, key, default=None):
         items = self.getall(key)
@@ -385,7 +385,7 @@ class MatchVariable(object):
         self.stop = self.slice[1]
 
     def __repr__(self):
-        return '%s(%r, %r)' % (self.__class__.__name__, self.varname, self.value)
+        return '{0!s}({1!r}, {2!r})'.format(self.__class__.__name__, self.varname, self.value)
 
 
 def compile(expression, escape_funcs=None, unescape_funcs=None):

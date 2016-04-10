@@ -84,7 +84,7 @@ class Char(object):
         return self.char != other.char or self.token != other.token
 
     def __repr__(self):
-        return '%s(%r, %r)' % (self.__class__.__name__, self.char, self.token)
+        return '{0!s}({1!r}, {2!r})'.format(self.__class__.__name__, self.char, self.token)
 
 
 _CHAR_CACHE = FastDictCache(Char, size=1000 * 1000)
@@ -143,6 +143,6 @@ class WritePosition(object):
         self.extended_height = extended_height or height
 
     def __repr__(self):
-        return '%s(%r, %r, %r, %r, %r)' % (
+        return '{0!s}({1!r}, {2!r}, {3!r}, {4!r}, {5!r})'.format(
             self.__class__.__name__,
             self.xpos, self.ypos, self.width, self.height, self.extended_height)

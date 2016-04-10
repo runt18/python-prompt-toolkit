@@ -30,7 +30,7 @@ class Suggestion(object):
         self.text = text
 
     def __repr__(self):
-        return 'Suggestion(%s)' % self.text
+        return 'Suggestion({0!s})'.format(self.text)
 
 
 class AutoSuggest(with_metaclass(ABCMeta, object)):

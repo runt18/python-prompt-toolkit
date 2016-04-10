@@ -586,7 +586,7 @@ class Float(object):
             return self._get_height(cli)
 
     def __repr__(self):
-        return 'Float(content=%r)' % self.content
+        return 'Float(content={0!r})'.format(self.content)
 
 
 class WindowRenderInfo(object):
@@ -823,7 +823,7 @@ class ScrollOffsets(object):
         return int(self._right)
 
     def __repr__(self):
-        return 'ScrollOffsets(top=%r, bottom=%r, left=%r, right=%r)' % (
+        return 'ScrollOffsets(top={0!r}, bottom={1!r}, left={2!r}, right={3!r})'.format(
             self.top, self.bottom, self.left, self.right)
 
 
@@ -908,7 +908,7 @@ class Window(Container):
         self.reset()
 
     def __repr__(self):
-        return 'Window(content=%r)' % self.content
+        return 'Window(content={0!r})'.format(self.content)
 
     def reset(self):
         self.content.reset()
@@ -1499,7 +1499,7 @@ class ConditionalContainer(Container):
         self.filter = to_cli_filter(filter)
 
     def __repr__(self):
-        return 'ConditionalContainer(%r, filter=%r)' % (self.content, self.filter)
+        return 'ConditionalContainer({0!r}, filter={1!r})'.format(self.content, self.filter)
 
     def reset(self):
         self.content.reset()

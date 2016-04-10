@@ -20,14 +20,14 @@ def main():
         i = 0
         while running:
             i += 1
-            print('i=%i' % i)
+            print('i={0:d}'.format(i))
             time.sleep(1)
     threading.Thread(target=thread).start()
 
     # Now read the input. The print statements of the other thread
     # should not disturb anything.
     result = prompt('Say something: ', patch_stdout=True)
-    print('You said: %s' % result)
+    print('You said: {0!s}'.format(result))
 
     # Stop thrad.
     running = False

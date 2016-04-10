@@ -33,7 +33,7 @@ class _Binding(object):
         return self.handler(event)
 
     def __repr__(self):
-        return '%s(keys=%r, handler=%r)' % (
+        return '{0!s}(keys={1!r}, handler={2!r})'.format(
             self.__class__.__name__, self.keys, self.handler)
 
 
@@ -124,7 +124,7 @@ class Registry(object):
                 return
 
         # No key binding found for this function. Raise ValueError.
-        raise ValueError('Binding not found: %r' % (function, ))
+        raise ValueError('Binding not found: {0!r}'.format(function ))
 
     def get_bindings_for_keys(self, keys):
         """

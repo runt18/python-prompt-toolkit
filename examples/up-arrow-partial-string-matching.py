@@ -29,7 +29,7 @@ def main():
     text = prompt('Say something: ', history=history,
                   enable_history_search=True,
                   on_abort=AbortAction.RETRY)
-    print('You said: %s' % text)
+    print('You said: {0!s}'.format(text))
 
 
 if __name__ == '__main__':

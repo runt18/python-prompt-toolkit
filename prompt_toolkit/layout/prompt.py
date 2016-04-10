@@ -87,7 +87,7 @@ def _get_isearch_tokens(cli):
         else:
             text = 'i-search'
 
-        return [(Token.Prompt.Search, '(%s)`' % text)]
+        return [(Token.Prompt.Search, '({0!s})`'.format(text))]
 
     def text():
         return [(Token.Prompt.Search.Text, cli.buffers[SEARCH_BUFFER].text)]

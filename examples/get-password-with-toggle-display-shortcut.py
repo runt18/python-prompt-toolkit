@@ -24,7 +24,7 @@ def main():
     password = prompt('Password: ',
                       is_password=Condition(lambda cli: hidden[0]),
                       key_bindings_registry=key_bindings_manager.registry)
-    print('You said: %s' % password)
+    print('You said: {0!s}'.format(password))
 
 
 if __name__ == '__main__':

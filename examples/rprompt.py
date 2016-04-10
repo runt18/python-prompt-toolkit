@@ -26,4 +26,4 @@ def get_rprompt_tokens(cli):
 
 if __name__ == '__main__':
     answer = prompt('> ', get_rprompt_tokens=get_rprompt_tokens, style=example_style)
-    print('You said: %s' % answer)
+    print('You said: {0!s}'.format(answer))

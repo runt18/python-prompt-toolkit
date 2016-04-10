@@ -34,7 +34,7 @@ class Filter(with_metaclass(ABCMeta, object)):
         elif isinstance(other, Never) or isinstance(self, Always):
             return other
         else:
-            assert isinstance(other, Filter), 'Expecting filter, got %r' % other
+            assert isinstance(other, Filter), 'Expecting filter, got {0!r}'.format(other)
             return _and(self, other)
 
     def __or__(self, other):
@@ -46,7 +46,7 @@ class Filter(with_metaclass(ABCMeta, object)):
         elif isinstance(other, Never) or isinstance(self, Always):
             return self
         else:
-            assert isinstance(other, Filter), 'Expecting filter, got %r' % other
+            assert isinstance(other, Filter), 'Expecting filter, got {0!r}'.format(other)
             return _or(self, other)
 
     def __invert__(self):
@@ -178,7 +178,7 @@ class _Invert(Filter):
         return not self.filter(*a, **kw)
 
     def __repr__(self):
-        return '~%r' % self.filter
+        return '~{0!r}'.format(self.filter)
 
     def test_args(self, *args):
         return self.filter.test_args(*args)
@@ -229,7 +229,7 @@ class Condition(Filter):
         return self.func(*a, **kw)
 
     def __repr__(self):
-        return 'Condition(%r)' % self.func
+        return 'Condition({0!r})'.format(self.func)
 
     def test_args(self, *a):
         return test_callable_args(self.func, a)

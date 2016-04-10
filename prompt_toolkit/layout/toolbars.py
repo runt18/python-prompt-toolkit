@@ -184,7 +184,7 @@ class ValidationToolbarControl(TokenListControl):
                     buffer.validation_error.cursor_position)
 
                 if show_position:
-                    text = '%s (line=%s column=%s)' % (
+                    text = '{0!s} (line={1!s} column={2!s})'.format(
                         buffer.validation_error.message, row + 1, column + 1)
                 else:
                     text = buffer.validation_error.message

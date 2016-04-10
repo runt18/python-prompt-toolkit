@@ -40,4 +40,4 @@ def get_prompt_tokens(cli):
 
 if __name__ == '__main__':
     answer = prompt(get_prompt_tokens=get_prompt_tokens, style=example_style)
-    print('You said: %s' % answer)
+    print('You said: {0!s}'.format(answer))

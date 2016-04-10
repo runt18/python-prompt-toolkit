@@ -113,7 +113,7 @@ class CompletionsMenuControl(UIControl):
 
         text, tw = _trim_text(completion.display, width - 2)
         padding = ' ' * (width - 2 - tw)
-        return [(token, ' %s%s ' % (text, padding))]
+        return [(token, ' {0!s}{1!s} '.format(text, padding))]
 
     def _get_menu_item_meta_tokens(self, completion, is_current_completion, width):
         if is_current_completion:
@@ -123,7 +123,7 @@ class CompletionsMenuControl(UIControl):
 
         text, tw = _trim_text(completion.display_meta, width - 2)
         padding = ' ' * (width - 2 - tw)
-        return [(token, ' %s%s ' % (text, padding))]
+        return [(token, ' {0!s}{1!s} '.format(text, padding))]
 
     def mouse_handler(self, cli, mouse_event):
         """
@@ -372,7 +372,7 @@ class MultiColumnCompletionMenuControl(UIControl):
         text, tw = _trim_text(completion.display, width)
         padding = ' ' * (width - tw - 1)
 
-        return [(token, ' %s%s' % (text, padding))]
+        return [(token, ' {0!s}{1!s}'.format(text, padding))]
 
     def mouse_handler(self, cli, mouse_event):
         """
@@ -486,6 +486,6 @@ class _SelectedCompletionMetaControl(UIControl):
         state = cli.current_buffer.complete_state
 
         if state and state.current_completion and state.current_completion.display_meta:
-            return [(token, ' %s ' % state.current_completion.display_meta)]
+            return [(token, ' {0!s} '.format(state.current_completion.display_meta))]
 
         return []

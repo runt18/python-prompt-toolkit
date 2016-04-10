@@ -35,7 +35,7 @@ def _colorformat(text):
     elif text == '':
         return text
 
-    raise ValueError('Wrong color format %r' % text)
+    raise ValueError('Wrong color format {0!r}'.format(text))
 
 
 def style_from_dict(style_dict, include_defaults=True):

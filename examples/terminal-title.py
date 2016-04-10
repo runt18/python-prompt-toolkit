@@ -8,4 +8,4 @@ if __name__ == '__main__':
         return 'This is the title'
 
     answer = prompt('Give me some input: ', get_title=get_title)
-    print('You said: %s' % answer)
+    print('You said: {0!s}'.format(answer))

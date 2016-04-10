@@ -50,7 +50,7 @@ class _IntegerFromCallable(Integer):
         self.func = func
 
     def __repr__(self):
-        return 'Integer.from_callable(%r)' % self.func
+        return 'Integer.from_callable({0!r})'.format(self.func)
 
     def __int__(self):
         return int(self.func())

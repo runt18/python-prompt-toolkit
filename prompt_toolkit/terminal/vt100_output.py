@@ -376,7 +376,7 @@ class Vt100_Output(Output):
         Set terminal title.
         """
         if self.term not in ('linux', 'eterm-color'):  # Not supported by the Linux console.
-            self.write_raw('\x1b]2;%s\x07' % title.replace('\x1b', '').replace('\x07', ''))
+            self.write_raw('\x1b]2;{0!s}\x07'.format(title.replace('\x1b', '').replace('\x07', '')))
 
     def clear_title(self):
         self.set_title('')
@@ -452,7 +452,7 @@ class Vt100_Output(Output):
 
     def cursor_goto(self, row=0, column=0):
         """ Move cursor position. """
-        self.write_raw('\x1b[%i;%iH' % (row, column))
+        self.write_raw('\x1b[{0:d};{1:d}H'.format(row, column))
 
     def cursor_up(self, amount):
         if amount == 0:
@@ -460,7 +460,7 @@ class Vt100_Output(Output):
         elif amount == 1:
             self.write_raw('\x1b[A')
         else:
-            self.write_raw('\x1b[%iA' % amount)
+            self.write_raw('\x1b[{0:d}A'.format(amount))
 
     def cursor_down(self, amount):
         if amount == 0:
@@ -470,7 +470,7 @@ class Vt100_Output(Output):
             #       scroll.
             self.write_raw('\x1b[B')
         else:
-            self.write_raw('\x1b[%iB' % amount)
+            self.write_raw('\x1b[{0:d}B'.format(amount))
 
     def cursor_forward(self, amount):
         if amount == 0:
@@ -478,7 +478,7 @@ class Vt100_Output(Output):
         elif amount == 1:
             self.write_raw('\x1b[C')
         else:
-            self.write_raw('\x1b[%iC' % amount)
+            self.write_raw('\x1b[{0:d}C'.format(amount))
 
     def cursor_backward(self, amount):
         if amount == 0:
@@ -486,7 +486,7 @@ class Vt100_Output(Output):
         elif amount == 1:
             self.write_raw('\b')  # '\x1b[D'
         else:
-            self.write_raw('\x1b[%iD' % amount)
+            self.write_raw('\x1b[{0:d}D'.format(amount))
 
     def hide_cursor(self):
         self.write_raw('\x1b[?25l')

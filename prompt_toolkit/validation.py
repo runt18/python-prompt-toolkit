@@ -28,7 +28,7 @@ class ValidationError(Exception):
         self.message = message
 
     def __repr__(self):
-        return '%s(cursor_position=%r, message=%r)' % (
+        return '{0!s}(cursor_position={1!r}, message={2!r})'.format(
             self.__class__.__name__, self.cursor_position, self.message)
 
 

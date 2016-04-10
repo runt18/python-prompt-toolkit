@@ -79,13 +79,13 @@ class Document(object):
     __slots__ = ('text', 'cursor_position', 'selection', '_cache')
 
     def __init__(self, text='', cursor_position=None, selection=None):
-        assert isinstance(text, six.text_type), 'Got %r' % text
+        assert isinstance(text, six.text_type), 'Got {0!r}'.format(text)
         assert selection is None or isinstance(selection, SelectionState)
 
         # Check cursor position. It can also be right after the end. (Where we
         # insert text.)
         assert cursor_position is None or cursor_position <= len(text), AssertionError(
-                'cursor_position=%r, len_text=%r' % (cursor_position, len(text)))
+                'cursor_position={0!r}, len_text={1!r}'.format(cursor_position, len(text)))
 
         # By default, if no cursor position was given, make sure to put the
         # cursor position is at the end of the document. This is what makes
@@ -102,7 +102,7 @@ class Document(object):
         self._cache = _text_to_document_cache.setdefault(self.text, _DocumentCache())
 
     def __repr__(self):
-        return '%s(%r, %r)' % (self.__class__.__name__, self.text, self.cursor_position)
+        return '{0!s}({1!r}, {2!r})'.format(self.__class__.__name__, self.text, self.cursor_position)
 
     @property
     def current_char(self):

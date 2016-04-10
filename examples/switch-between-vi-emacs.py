@@ -34,7 +34,7 @@ def run():
         " Display the current input mode. "
         text = 'Vi' if vi_mode_enabled else 'Emacs'
         return [
-            (Token.Toolbar, ' [F4] %s ' % text)
+            (Token.Toolbar, ' [F4] {0!s} '.format(text))
         ]
 
     prompt('> ', key_bindings_registry=manager.registry,

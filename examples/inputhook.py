@@ -73,7 +73,7 @@ def main():
                     eventloop=create_eventloop(inputhook=inputhook),
                     lexer=PythonLexer,
                     patch_stdout=True)
-    print('You said: %s' % result)
+    print('You said: {0!s}'.format(result))
 
 
 if __name__ == '__main__':

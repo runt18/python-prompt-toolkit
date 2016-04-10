@@ -16,4 +16,4 @@ if __name__ == '__main__':
     print('')
 
     answer = prompt('Give me some input: ', clipboard=PyperclipClipboard())
-    print('You said: %s' % answer)
+    print('You said: {0!s}'.format(answer))

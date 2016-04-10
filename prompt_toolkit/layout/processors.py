@@ -284,7 +284,7 @@ class BeforeInput(Processor):
         return cls(get_static_tokens)
 
     def __repr__(self):
-        return '%s(get_tokens=%r)' % (
+        return '{0!s}(get_tokens={1!r})'.format(
             self.__class__.__name__, self.get_tokens)
 
 
@@ -318,7 +318,7 @@ class AfterInput(Processor):
         return cls(get_static_tokens)
 
     def __repr__(self):
-        return '%s(get_tokens=%r)' % (
+        return '{0!s}(get_tokens={1!r})'.format(
             self.__class__.__name__, self.get_tokens)
 
 
@@ -518,5 +518,5 @@ class ConditionalProcessor(Processor):
             return False
 
     def __repr__(self):
-        return '%s(processor=%r, filter=%r)' % (
+        return '{0!s}(processor={1!r}, filter={2!r})'.format(
             self.__class__.__name__, self.processor, self.filter)
