@@ -8,5 +8,5 @@ from prompt_toolkit import prompt
 import getpass
 
 if __name__ == '__main__':
-    answer = prompt('What is your name: ', default='%s' % getpass.getuser())
-    print('You said: %s' % answer)
+    answer = prompt('What is your name: ', default='{0!s}'.format(getpass.getuser()))
+    print('You said: {0!s}'.format(answer))

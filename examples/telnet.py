@@ -37,7 +37,7 @@ class ExampleApplication(TelnetApplication):
         if document.text == 'exit':
             telnet_connection.close()
         else:
-            telnet_connection.send('You said: %s\n\n' % document.text)
+            telnet_connection.send('You said: {0!s}\n\n'.format(document.text))
 
     def client_leaving(self, telnet_connection):
         # Say 'bye' when the client quits.

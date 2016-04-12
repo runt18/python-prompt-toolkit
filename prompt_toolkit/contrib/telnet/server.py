@@ -87,7 +87,7 @@ class _ConnectionStdout(object):
         try:
             self._connection.send(b''.join(self._buffer))
         except socket.error as e:
-            logger.error("Couldn't send data over socket: %s" % e)
+            logger.error("Couldn't send data over socket: {0!s}".format(e))
 
         self._buffer = []
 

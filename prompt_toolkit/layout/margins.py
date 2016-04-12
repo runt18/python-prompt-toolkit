@@ -70,7 +70,7 @@ class NumberredMargin(Margin):
 
     def get_width(self, cli, get_ui_content):
         line_count = get_ui_content().line_count
-        return max(3, len('%s' % line_count) + 1)
+        return max(3, len('{0!s}'.format(line_count)) + 1)
 
     def create_margin(self, cli, window_render_info, width, height):
         relative = self.relative(cli)
@@ -94,15 +94,15 @@ class NumberredMargin(Margin):
                     # Current line.
                     if relative:
                         # Left align current number in relative mode.
-                        result.append((token_current, '%i' % (lineno + 1)))
+                        result.append((token_current, '{0:d}'.format((lineno + 1))))
                     else:
-                        result.append((token_current, ('%i ' % (lineno + 1)).rjust(width)))
+                        result.append((token_current, ('{0:d} '.format((lineno + 1))).rjust(width)))
                 else:
                     # Other lines.
                     if relative:
                         lineno = abs(lineno - current_lineno) - 1
 
-                    result.append((token, ('%i ' % (lineno + 1)).rjust(width)))
+                    result.append((token, ('{0:d} '.format((lineno + 1))).rjust(width)))
 
             last_lineno = lineno
             result.append((Token, '\n'))
@@ -240,7 +240,7 @@ class PromptMargin(Margin):
             tokens.append((Token, '\n'))
             if show_numbers:
                 if y != last_y:
-                    tokens.append((Token.LineNumber, ('%i ' % (y + 1)).rjust(width)))
+                    tokens.append((Token.LineNumber, ('{0:d} '.format((y + 1))).rjust(width)))
             else:
                 tokens.extend(tokens2)
             last_y = y

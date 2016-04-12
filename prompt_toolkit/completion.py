@@ -40,7 +40,7 @@ class Completion(object):
         assert self.start_position <= 0
 
     def __repr__(self):
-        return '%s(text=%r, start_position=%r)' % (
+        return '{0!s}(text={1!r}, start_position={2!r})'.format(
             self.__class__.__name__, self.text, self.start_position)
 
     def __eq__(self, other):
@@ -91,7 +91,7 @@ class CompleteEvent(object):
         self.completion_requested = completion_requested
 
     def __repr__(self):
-        return '%s(text_inserted=%r, completion_requested=%r)' % (
+        return '{0!s}(text_inserted={1!r}, completion_requested={2!r})'.format(
             self.__class__.__name__, self.text_inserted, self.completion_requested)
 
 

@@ -32,7 +32,7 @@ class HasFocus(Filter):
         return cli.current_buffer_name == self.buffer_name
 
     def __repr__(self):
-        return 'HasFocus(%r)' % self.buffer_name
+        return 'HasFocus({0!r})'.format(self.buffer_name)
 
 
 class InFocusStack(Filter):
@@ -46,7 +46,7 @@ class InFocusStack(Filter):
         return self.buffer_name in cli.buffers.focus_stack
 
     def __repr__(self):
-        return 'InFocusStack(%r)' % self.buffer_name
+        return 'InFocusStack({0!r})'.format(self.buffer_name)
 
 
 class HasSelection(Filter):

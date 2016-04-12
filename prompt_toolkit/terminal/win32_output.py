@@ -122,16 +122,16 @@ class Win32Output(Output):
         self.flush()
 
         if _DEBUG_RENDER_OUTPUT:
-            self.LOG.write(('%r' % func.__name__).encode('utf-8') + b'\n')
-            self.LOG.write(b'     ' + ', '.join(['%r' % i for i in a]).encode('utf-8') + b'\n')
-            self.LOG.write(b'     ' + ', '.join(['%r' % type(i) for i in a]).encode('utf-8') + b'\n')
+            self.LOG.write(('{0!r}'.format(func.__name__)).encode('utf-8') + b'\n')
+            self.LOG.write(b'     ' + ', '.join(['{0!r}'.format(i) for i in a]).encode('utf-8') + b'\n')
+            self.LOG.write(b'     ' + ', '.join(['{0!r}'.format(type(i)) for i in a]).encode('utf-8') + b'\n')
             self.LOG.flush()
 
         try:
             return func(*a, **kw)
         except ArgumentError as e:
             if _DEBUG_RENDER_OUTPUT:
-                self.LOG.write(('    Error in %r %r %s\n' % (func.__name__, e, e)).encode('utf-8'))
+                self.LOG.write(('    Error in {0!r} {1!r} {2!s}\n'.format(func.__name__, e, e)).encode('utf-8'))
 
     def get_win32_screen_buffer_info(self):
         """
@@ -258,7 +258,7 @@ class Win32Output(Output):
         data = ''.join(self._buffer)
 
         if _DEBUG_RENDER_OUTPUT:
-            self.LOG.write(('%r' % data).encode('utf-8') + b'\n')
+            self.LOG.write(('{0!r}'.format(data)).encode('utf-8') + b'\n')
             self.LOG.flush()
 
         # Print characters one by one. This appears to be the best soluton

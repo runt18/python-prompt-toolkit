@@ -108,7 +108,7 @@ class CompletionState(object):
         self.complete_index = complete_index  # Position in the `_completions` array.
 
     def __repr__(self):
-        return '%s(%r, <%r> completions, index=%r)' % (
+        return '{0!s}({1!r}, <{2!r}> completions, index={3!r})'.format(
             self.__class__.__name__,
             self.original_document, len(self.current_completions), self.complete_index)
 
@@ -314,7 +314,7 @@ class Buffer(object):
         valid for this text. text/cursor_position should be consistent at any time,
         otherwise set a Document instead.)
         """
-        assert isinstance(value, six.text_type), 'Got %r' % value
+        assert isinstance(value, six.text_type), 'Got {0!r}'.format(value)
         assert self.cursor_position <= len(value)
 
         # Don't allow editing of read-only buffers.
@@ -704,9 +704,9 @@ class Buffer(object):
 
                         # Create completion.
                         if i == self.working_index:
-                            display_meta = "Current, line %s" % (j+1)
+                            display_meta = "Current, line {0!s}".format((j+1))
                         else:
-                            display_meta = "History %s, line %s" % (i+1, j+1)
+                            display_meta = "History {0!s}, line {1!s}".format(i+1, j+1)
 
                         completions.append(Completion(
                             l,

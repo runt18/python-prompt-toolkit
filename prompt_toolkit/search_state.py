@@ -20,7 +20,7 @@ class SearchState(object):
         self.ignore_case = ignore_case
 
     def __repr__(self):
-        return '%s(%r, direction=%r, ignore_case=%r)' % (
+        return '{0!s}({1!r}, direction={2!r}, ignore_case={3!r})'.format(
             self.__class__.__name__, self.text, self.direction, self.ignore_case)
 
     def __invert__(self):

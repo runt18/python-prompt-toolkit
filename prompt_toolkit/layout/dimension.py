@@ -63,7 +63,7 @@ class LayoutDimension(object):
         return cls(min=amount, max=amount, preferred=amount)
 
     def __repr__(self):
-        return 'LayoutDimension(min=%r, max=%r, preferred=%r, weight=%r)' % (
+        return 'LayoutDimension(min={0!r}, max={1!r}, preferred={2!r}, weight={3!r})'.format(
             self.min, self.max, self.preferred, self.weight)
 
     def __add__(self, other):

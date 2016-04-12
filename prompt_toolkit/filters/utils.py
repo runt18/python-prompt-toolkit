@@ -17,7 +17,7 @@ def to_simple_filter(bool_or_filter):
     turn it into a SimpleFilter.
     """
     if not isinstance(bool_or_filter, (bool, SimpleFilter)):
-        raise TypeError('Expecting a bool or a SimpleFilter instance. Got %r' % bool_or_filter)
+        raise TypeError('Expecting a bool or a SimpleFilter instance. Got {0!r}'.format(bool_or_filter))
 
     return {
         True: _always,
@@ -31,7 +31,7 @@ def to_cli_filter(bool_or_filter):
     turn it into a CLIFilter.
     """
     if not isinstance(bool_or_filter, (bool, CLIFilter)):
-        raise TypeError('Expecting a bool or a CLIFilter instance. Got %r' % bool_or_filter)
+        raise TypeError('Expecting a bool or a CLIFilter instance. Got {0!r}'.format(bool_or_filter))
 
     return {
         True: _always,

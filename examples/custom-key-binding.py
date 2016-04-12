@@ -50,7 +50,7 @@ def main():
     # Read input.
     print('Press F4 to insert "hello world", type "xy" to insert "z":')
     text = prompt('> ', key_bindings_registry=key_bindings_manager.registry)
-    print('You said: %s' % text)
+    print('You said: {0!s}'.format(text))
 
 
 if __name__ == '__main__':

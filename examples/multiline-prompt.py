@@ -8,4 +8,4 @@ from prompt_toolkit import prompt
 
 if __name__ == '__main__':
     answer = prompt('Give me some input:\n > ', multiline=True)
-    print('You said: %s' % answer)
+    print('You said: {0!s}'.format(answer))

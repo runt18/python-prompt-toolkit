@@ -93,7 +93,7 @@ if __name__ == '__main__':
                 }[vars.get('operator1') or vars.get('operator2')]
 
                 # Execute and print the result.
-                print('Result: %s\n' % (operator(var1, var2)))
+                print('Result: {0!s}\n'.format((operator(var1, var2))))
 
             elif vars.get('operator2'):
                 print('Operator 2')

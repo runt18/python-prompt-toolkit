@@ -20,7 +20,7 @@ def main():
     text = prompt('Say something: ',
                   get_bottom_toolbar_tokens=get_bottom_toolbar_tokens,
                   style=test_style)
-    print('You said: %s' % text)
+    print('You said: {0!s}'.format(text))
 
 
 if __name__ == '__main__':

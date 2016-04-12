@@ -63,7 +63,7 @@ class StdinInput(Input):
         self.stdin = stdin or sys.stdin
 
     def __repr__(self):
-        return 'StdinInput(stdin=%r)' % (self.stdin,)
+        return 'StdinInput(stdin={0!r})'.format(self.stdin)
 
     def raw_mode(self):
         return raw_mode(self.stdin.fileno())

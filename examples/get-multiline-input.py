@@ -16,4 +16,4 @@ if __name__ == '__main__':
     print('Press [Meta+Enter] or [Esc] followed by [Enter] to accept input.')
     answer = prompt('Multiline input: ', multiline=True,
                     get_continuation_tokens=continuation_tokens)
-    print('You said: %s' % answer)
+    print('You said: {0!s}'.format(answer))

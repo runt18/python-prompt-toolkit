@@ -39,7 +39,7 @@ def main():
 
     # Read input.
     text = prompt('Say something: ', key_bindings_registry=key_bindings_manager.registry)
-    print('You said: %s' % text)
+    print('You said: {0!s}'.format(text))
 
 
 if __name__ == '__main__':

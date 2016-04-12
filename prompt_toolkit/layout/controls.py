@@ -226,7 +226,7 @@ class TokenListControl(UIControl):
         self._tokens = None
 
     def __repr__(self):
-        return '%s(%r)' % (self.__class__.__name__, self.get_tokens)
+        return '{0!s}({1!r})'.format(self.__class__.__name__, self.get_tokens)
 
     def _get_tokens_cached(self, cli):
         """
@@ -369,7 +369,7 @@ class FillControl(UIControl):
         self.character = character
 
     def __repr__(self):
-        return '%s(character=%r, token=%r)' % (
+        return '{0!s}(character={1!r}, token={2!r})'.format(
             self.__class__.__name__, self.character, self.token)
 
     def reset(self):

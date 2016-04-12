@@ -21,7 +21,7 @@ class COORD(Structure):
     ]
 
     def __repr__(self):
-        return '%s(X=%r, Y=%r, type_x=%r, type_y=%r)' % (
+        return '{0!s}(X={1!r}, Y={2!r}, type_x={3!r}, type_y={4!r})'.format(
             self.__class__.__name__, self.X, self.Y, type(self.X), type(self.Y))
 
 
@@ -135,12 +135,12 @@ class CONSOLE_SCREEN_BUFFER_INFO(Structure):
     ]
 
     def __str__(self):
-        return '(%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d)' % (
+        return '({0:d},{1:d},{2:d},{3:d},{4:d},{5:d},{6:d},{7:d},{8:d},{9:d},{10:d})'.format(
             self.dwSize.Y, self.dwSize.X,
             self.dwCursorPosition.Y, self.dwCursorPosition.X,
             self.wAttributes,
             self.srWindow.Top, self.srWindow.Left, self.srWindow.Bottom, self.srWindow.Right,
-            self.dwMaximumWindowSize.Y, self.dwMaximumWindowSize.X,
+            self.dwMaximumWindowSize.Y, self.dwMaximumWindowSize.X
         )
 
 

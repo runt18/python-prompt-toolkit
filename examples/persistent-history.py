@@ -12,7 +12,7 @@ from prompt_toolkit.history import FileHistory
 def main():
     our_history = FileHistory('.example-history-file')
     text = prompt('Say something: ', history=our_history)
-    print('You said: %s' % text)
+    print('You said: {0!s}'.format(text))
 
 
 if __name__ == '__main__':

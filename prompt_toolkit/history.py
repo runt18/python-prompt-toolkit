@@ -106,9 +106,9 @@ class FileHistory(History):
             def write(t):
                 f.write(t.encode('utf-8'))
 
-            write('\n# %s\n' % datetime.datetime.now())
+            write('\n# {0!s}\n'.format(datetime.datetime.now()))
             for line in string.split('\n'):
-                write('+%s\n' % line)
+                write('+{0!s}\n'.format(line))
 
     def __getitem__(self, key):
         return self.strings[key]
